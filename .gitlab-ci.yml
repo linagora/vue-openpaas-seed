@@ -3,6 +3,7 @@ image: node:10
 stages:
   - lint
   - test
+  - docker_build
 
 lint:
   stage: lint
@@ -38,4 +39,26 @@ test_e2e:
   script:
     - npm install
     - npm run test:e2e -- --headless
+
+docker_build:
+  stage: docker_build
+  tags:
+    - docker
+  services:
+    - name: docker-registry.linagora.com:5000/linshare-snapshots/linshare-dind:latest
+      alias: docker-dind
+  variables:
+    DOCKER_HOST: "tcp://docker-dind"
+    DOCKER_IMAGE: "linagora/vue-openpaas-seed"
+  image: docker-registry.linagora.com:5000/linshare-snapshots/linshare-dind:latest
+  script:
+    - docker build -t ${DOCKER_IMAGE} .
+    - docker login -u ${HUB_DOCKER_USER} -p ${HUB_DOCKER_TOKEN}
+    - docker push ${DOCKER_IMAGE}
+    - docker logout
+  only:
+    - master@linagora/lgs/openpaas/vue-openpaas-seed
+  except:
+    variables:
+      - $SKIP_BUILD_DOCKER
 
