@@ -35,9 +35,9 @@
 
 <script>
 import { theme } from "@/style";
-import SearchHeader from "@/components/SearchHeader.vue";
-import UserMenu from "@/components/UserMenu.vue";
-import Snackbar from "@/components/Snackbar.vue";
+import SearchHeader from "@/components/ui/SearchHeader.vue";
+import UserMenu from "@/components/ui/UserMenu.vue";
+import Snackbar from "@/components/ui/Snackbar.vue";
 
 export default {
   computed: {

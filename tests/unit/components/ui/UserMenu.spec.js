@@ -4,7 +4,7 @@ import { shallowMount } from "@vue/test-utils";
 import i18n from "@/i18n";
 import store from "@/store";
 import router from "@/router";
-import UserMenu from "@/components/UserMenu";
+import UserMenu from "@/components/ui/UserMenu";
 
 const mockLocalVue = createLocalVue();
 jest.doMock("vue", () => ({ default: mockLocalVue }));
