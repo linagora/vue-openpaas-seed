@@ -1,6 +1,7 @@
 import VueAxios from "vue-axios";
 import OpenPaaS from "vue-openpaas-components";
 import Vuetify from "vuetify";
+import PortalVue from "portal-vue";
 import colors from "vuetify/es5/util/colors";
 
 import App from "@/App";
@@ -21,6 +22,8 @@ function applicationInit(VueInstance, { axiosInstance = api, auth = servicesAuth
   VueInstance.use(OpenPaaS);
   VueInstance.use(VueAxios, axiosInstance);
   axiosInstance.defaults.baseURL = store.state.applicationConfiguration.baseUrl;
+
+  VueInstance.use(PortalVue);
 
   VueInstance.router = router;
 

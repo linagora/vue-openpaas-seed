@@ -17,6 +17,9 @@
         </div>
         <!--<op-applications-menu/>-->
         <op-user-menu/>
+        <template v-slot:extension v-if="showToolbarExtension">
+          <portal-target name="toolbar-extension"></portal-target>
+        </template>
       </v-toolbar>
       <v-content>
         <v-container fluid fill-height>
@@ -45,6 +48,11 @@ export default {
       if (!this.$auth.check()) {
         return theme.colors.blue.base;
       }
+    },
+    showToolbarExtension() {
+      // dirty hack to avoid to empty a portal-target with empty element
+      // which displays the toolbar extension slot without content
+      return this.$route.meta && this.$route.meta.showToolbarExtension;
     }
   },
   components: {
