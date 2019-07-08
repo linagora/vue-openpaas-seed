@@ -1,11 +1,14 @@
 <template>
   <v-app id="openpaas">
-    <div v-if="$auth.ready()">
-      <v-navigation-drawer clipped fixed app>
+    <div v-if="$auth.ready()"
+      :style="{ backgroundColor: backgroundColor, height: !$auth.check() ? '100vh': '' }"
+      id="app-ready"
+    >
+      <v-navigation-drawer fixed clipped hide-overlay app v-if="$auth.check()">
         <!--<op-sidebar/>-->
       </v-navigation-drawer>
-      <v-toolbar clipped-left app fixed color="primary" v-if="$auth.check()">
-        <v-toolbar-side-icon color="primary"></v-toolbar-side-icon>
+      <v-toolbar clipped-left app fixed color="blue" dark v-if="$auth.check()">
+        <v-toolbar-side-icon></v-toolbar-side-icon>
         <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
           <img class="hidden-sm-and-down" id="header-logo" src="@/assets/logo.svg"/>
         </v-toolbar-title>
@@ -29,10 +32,18 @@
 </template>
 
 <script>
+import { theme } from "@/style";
 import UserMenu from "@/components/UserMenu.vue";
 import Snackbar from "@/components/Snackbar.vue";
 
 export default {
+  computed: {
+    backgroundColor() {
+      if (!this.$auth.check()) {
+        return theme.colors.blue.base;
+      }
+    }
+  },
   components: {
     "op-user-menu": UserMenu,
     "op-snackbar": Snackbar
