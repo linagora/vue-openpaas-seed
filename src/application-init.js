@@ -1,11 +1,13 @@
 import VueAxios from "vue-axios";
 import OpenPaaS from "vue-openpaas-components";
 import Vuetify from "vuetify";
+import PortalVue from "portal-vue";
 import colors from "vuetify/es5/util/colors";
 
 import App from "@/App";
 import router from "@/router";
 import { api, auth as servicesAuth } from "@/services";
+import { theme as appTheme } from "@/style";
 import ApplicationSettings from "@/services/application-settings";
 import store from "@/store";
 import i18n from "@/i18n";
@@ -16,16 +18,23 @@ const defaultTheme = {
 
 // This prevents polluting the global Axios and Vue instances
 // See for instance : https://github.com/vuetifyjs/vuetify/issues/4068#issuecomment-446988490
-function applicationInit(VueInstance, { axiosInstance = api, auth = servicesAuth, theme = defaultTheme } = {}) {
+function applicationInit(VueInstance, { axiosInstance = api, auth = servicesAuth, theme = appTheme.colors } = {}) {
   VueInstance.use(OpenPaaS);
   VueInstance.use(VueAxios, axiosInstance);
   axiosInstance.defaults.baseURL = store.state.applicationConfiguration.baseUrl;
+
+  VueInstance.use(PortalVue);
 
   VueInstance.router = router;
 
   VueInstance.use(require("@websanova/vue-auth"), auth);
 
-  VueInstance.use(Vuetify, { theme });
+  VueInstance.use(Vuetify, {
+    theme,
+    options: {
+      customProperties: true
+    }
+  });
 
   VueInstance.config.productionTip = false;
 

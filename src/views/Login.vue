@@ -1,16 +1,13 @@
 <template>
-  <v-content>
+  <v-content id="login">
     <v-container fluid fill-height>
       <v-layout align-center justify-center>
-        <v-flex xs12 sm8 md4>
-          <v-card class="elevation-12">
-            <v-toolbar color="primary">
-              <v-toolbar-title class="white--text">{{$t('OpenPaaS Login')}}</v-toolbar-title>
-            </v-toolbar>
+        <v-flex xs12 sm6 md5 lg4>
+          <v-card class="pa-3" flat>
             <v-card-text>
-              <v-form>
+              <v-form @keydown.native.enter="login">
                 <v-text-field
-                    prepend-icon="person"
+                    prepend-icon="account_circle"
                     name="login"
                     :label="$t('Login')"
                     type="text"
@@ -81,3 +78,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+#login {
+  height: 80vh;
+}
+</style>
