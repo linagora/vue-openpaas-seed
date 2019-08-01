@@ -7,7 +7,6 @@ window.openpaas = {
   //VUE_APP_AUTH: "oidc",
   //
   // OpenID Connect configuration
-  /*
   oidc: {
     // `authority` is the OpenID Connect Authority: lemon, keycloak, etc...
     authority: "http://localhost:8888/auth/realms/master",
@@ -27,5 +26,4 @@ window.openpaas = {
     // `scope` are used by the application during authentication to authorize access to a user's details
     scope: "openid email profile"
   }
-  */
 };
