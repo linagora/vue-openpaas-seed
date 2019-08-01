@@ -1,19 +1,17 @@
 import Axios from "axios";
 import store from "@/store";
 
-// Import your API functions here
-//import functions from "./whatever-api";
+class Api {
+  constructor(config = {}) {
+    this.client = Axios.create(config);
 
-const defaults = {
-  baseURL: store.state.applicationConfiguration.baseUrl
-};
+    this.client.defaults.baseURL = config.baseURL;
+    this.client.interceptors.request.use(config => {
+      config.headers.Authorization = `Bearer ${store.state.session.jwtToken}`;
 
-function Api(config) {
-  const instance = Axios.create(Object.assign({}, defaults, config));
-  // Assign them to your Axios instance here
-  //Object.assign(instance, functions);
-  return instance;
+      return config;
+    });
+  }
 }
 
 export { Api };
-export default new Api();

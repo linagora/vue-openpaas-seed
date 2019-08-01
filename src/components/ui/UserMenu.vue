@@ -26,16 +26,13 @@
 <script>
 import { mapGetters } from "vuex";
 import { OPAvatar } from "vue-openpaas-components";
-import { routeNames } from "@/router";
 
 export default {
   name: "op-user-menu",
   components: { "op-avatar": OPAvatar },
   methods: {
     logout() {
-      return this.$store.dispatch("session/logout").then(() => {
-        this.$router.push({ name: routeNames.LOGIN });
-      });
+      return this.$store.dispatch("session/logout").catch(err => console.log("Error while logout", err));
     },
 
     profile() {},

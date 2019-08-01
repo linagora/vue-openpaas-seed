@@ -5,11 +5,11 @@
         <v-flex xs12 sm6 md5 lg4>
           <v-card class="pa-3" flat>
             <v-card-text>
-              <v-form @keydown.native.enter="login">
+              <v-form data-test="login-form" @keydown.native.enter="login">
                 <v-text-field
                     prepend-icon="account_circle"
                     name="login"
-                    :label="$t('Login')"
+                    :label="$t('Identifier')"
                     type="text"
                     v-model="email"
                 ></v-text-field>
@@ -27,6 +27,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
+                flat
                 :disabled="logMeIn"
                 :loading="logMeIn"
                 @click="login">{{$t('Login')}}</v-btn>
@@ -69,7 +70,7 @@ export default {
           return response.data;
         })
         .catch(() => {
-          this.$store.dispatch("ui/displaySnackbar", { message: "Login error, please retry" });
+          this.$store.dispatch("ui/displaySnackbarMessage", "Login error, please retry");
         })
         .finally(() => {
           setTimeout(() => (this.logMeIn = false), 300);

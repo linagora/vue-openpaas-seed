@@ -7,5 +7,7 @@
   "Profile": "Hồ sơ",
   "Settings": "Cài đặt",
   "This is an about page": "Đây là trang thông tin",
-  "Welcome to Your OpenPaaS Vue.js App": "Chào mừng đến với ứng dụng OpenPaaS Vue.js"
+  "Welcome to Your OpenPaaS Vue.js App": "Chào mừng đến với ứng dụng OpenPaaS Vue.js",
+  "You are not connected to OpenPaaS": "Bạn chưa được kết nối với OpenPaaS",
+  "Connect": "Kết nối"
 }
