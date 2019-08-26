@@ -24,8 +24,7 @@ export default new Router({
       name: routeNames.HOME,
       component: Home,
       meta: {
-        auth: true,
-        isPublic: false
+        auth: true
       }
     },
     {
@@ -33,8 +32,7 @@ export default new Router({
       name: routeNames.LOGIN,
       component: () => LoginView(process.env.VUE_APP_AUTH),
       meta: {
-        auth: false,
-        isPublic: true
+        auth: false
       }
     },
     {
