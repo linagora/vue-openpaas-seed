@@ -6,7 +6,7 @@ import colors from "vuetify/es5/util/colors";
 
 import App from "@/App";
 import router from "@/router";
-import { api, auth as servicesAuth } from "@/services";
+import { Api, auth as servicesAuth } from "@/services";
 import { theme as appTheme } from "@/style";
 import ApplicationSettings from "@/services/application-settings";
 import store from "@/store";
@@ -18,16 +18,18 @@ const defaultTheme = {
 
 // This prevents polluting the global Axios and Vue instances
 // See for instance : https://github.com/vuetifyjs/vuetify/issues/4068#issuecomment-446988490
-function applicationInit(VueInstance, { axiosInstance = api, auth = servicesAuth, theme = appTheme.colors } = {}) {
-  VueInstance.use(OpenPaaS);
-  VueInstance.use(VueAxios, axiosInstance);
-  axiosInstance.defaults.baseURL = store.state.applicationConfiguration.baseUrl;
+async function applicationInit(VueInstance, { auth = servicesAuth, theme = appTheme.colors } = {}) {
+  const api = new Api({
+    baseURL: store.state.applicationConfiguration.baseUrl
+  });
+
+  VueInstance.use(OpenPaaS, { api });
+
+  VueInstance.use(VueAxios, api.client);
 
   VueInstance.use(PortalVue);
 
   VueInstance.router = router;
-
-  VueInstance.use(require("@websanova/vue-auth"), auth);
 
   VueInstance.use(Vuetify, {
     theme,
@@ -35,6 +37,8 @@ function applicationInit(VueInstance, { axiosInstance = api, auth = servicesAuth
       customProperties: true
     }
   });
+
+  await auth.init(VueInstance);
 
   VueInstance.config.productionTip = false;
 

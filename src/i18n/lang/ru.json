@@ -7,5 +7,7 @@
   "Profile": "Профиль",
   "Settings": "Настройки",
   "This is an about page": "Это о странице",
-  "Welcome to Your OpenPaaS Vue.js App": "Добро пожаловать в ваше приложение OpenPaaS Vue.js"
+  "Welcome to Your OpenPaaS Vue.js App": "Добро пожаловать в ваше приложение OpenPaaS Vue.js",
+  "You are not connected to OpenPaaS": "Вы не подключены к OpenPaaS",
+  "Connect": "соединять"
 }

@@ -1,13 +1,13 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/views/Home.vue";
-import Login from "@/views/Login.vue";
 import NotFound from "@/views/NotFound.vue";
 import ApplicationSettings from "@/services/application-settings";
 
+const LoginView = (auth = "basic") => import(`@/views/login/${auth}/Login.vue`);
+
 Vue.use(Router);
 
-// Set your routes here
 export const routeNames = Object.freeze({
   HOME: "Home",
   LOGIN: "Login",
@@ -30,7 +30,7 @@ export default new Router({
     {
       path: "/login",
       name: routeNames.LOGIN,
-      component: Login,
+      component: () => LoginView(process.env.VUE_APP_AUTH),
       meta: {
         auth: false
       }
