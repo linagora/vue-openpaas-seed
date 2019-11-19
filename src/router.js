@@ -30,7 +30,7 @@ export default new Router({
     {
       path: "/login",
       name: routeNames.LOGIN,
-      component: () => LoginView(process.env.VUE_APP_AUTH),
+      component: () => LoginView(ApplicationSettings.VUE_APP_AUTH),
       meta: {
         auth: false
       }
